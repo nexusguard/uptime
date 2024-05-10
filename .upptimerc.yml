@@ -1,36 +1,46 @@
 # Change these first
-owner: upptime # Your GitHub organization or username, where this repository lives
-repo: upptime # The name of this repository
+owner: nexusguard # Your GitHub organization or username, where this repository lives
+repo: nexusguard-uptime # The name of this repository
+user-agent: nexusguard-status-probe
 
 sites:
-  - name: Google
-    url: https://www.google.com
-  - name: Wikipedia
-    url: https://en.wikipedia.org
-  - name: Hacker News
-    url: https://news.ycombinator.com
-  - name: Test Broken Site
-    url: https://thissitedoesnotexist.koj.co
-  - name: IPv6 test
-    url: forwardemail.net
-    port: 80
-    check: "tcp-ping"
-    ipv6: true
+  - name: Nexusguard Public Website
+    url: https://www.nexusguard.com
+    method: GET
+
+  - name: Nexusguard Mitigation Infrastructure
+    url: https://www.nexusguard.com
+    method: GET
+    # "status":"up" for normal
+    __dangerous__body_down: '"status":"down"'
+    __dangerous__body_degraded: '"status":"degraded"'
 
 status-website:
   # Add your custom domain name, or remove the `cname` line if you don't have a domain
   # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
-  cname: demo.upptime.js.org
-  # baseUrl: /your-repo-name
-  logoUrl: https://raw.githubusercontent.com/upptime/upptime.js.org/master/static/img/icon.svg
-  name: Upptime
-  introTitle: "**Upptime** is the open-source uptime monitor and status page, powered entirely by GitHub."
-  introMessage: This is a sample status page which uses **real-time** data from our [GitHub repository](https://github.com/upptime/upptime). No server required — just GitHub Actions, Issues, and Pages. [**Get your own for free**](https://github.com/upptime/upptime)
+  # cname: status.nexusguard.com
+  baseUrl: /nexusguard-uptime
+  logoUrl: https://assets-global.website-files.com/657ac0efa4c56f07f2a96a09/657ac0efa4c56f07f2a96a59_sticky-logo-1.svg
+  favicon: https://assets-global.website-files.com/657ac0efa4c56f07f2a96a09/658682ffe0c14e285b4014fb_Nexusguard_Logo_Mark%201.png
+  name: Nexusguard Status Page
+  introTitle: "This is the status page of **Nexusguard** public-facing services"
+  introMessage: Welcome to the status page of Nexusguard!
+  theme: dark
   navbar:
     - title: Status
       href: /
-    - title: GitHub
-      href: https://github.com/$OWNER/$REPO
+    - title: About Us
+      href: https://nexusguard.com
+
+workflowSchedule:
+  graphs: "0 0 * * *"
+  responseTime: "0 23 * * *"
+  staticSite: "0 1 * * *"
+  summary: "0 0 * * *"
+  updateTemplate: "0 0 * * *"
+  updates: "0 3 * * *"
+  # every 6 hours
+  uptime: "0 */6 * * *"
 
 # Upptime also supports notifications, assigning issues, and more
 # See https://upptime.js.org/docs/configuration
