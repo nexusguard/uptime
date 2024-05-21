@@ -1,6 +1,6 @@
 # Change these first
 owner: nexusguard # Your GitHub organization or username, where this repository lives
-repo: nexusguard-uptime # The name of this repository
+repo: uptime # The name of this repository
 user-agent: nexusguard-status-probe
 
 sites:
@@ -19,7 +19,7 @@ status-website:
   # Add your custom domain name, or remove the `cname` line if you don't have a domain
   # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
   # cname: status.nexusguard.com
-  baseUrl: /nexusguard-uptime
+  baseUrl: /uptime
   logoUrl: https://assets-global.website-files.com/657ac0efa4c56f07f2a96a09/657ac0efa4c56f07f2a96a59_sticky-logo-1.svg
   favicon: https://assets-global.website-files.com/657ac0efa4c56f07f2a96a09/658682ffe0c14e285b4014fb_Nexusguard_Logo_Mark%201.png
   name: Nexusguard Status Page
