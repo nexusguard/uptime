@@ -4,35 +4,39 @@
     "url": "https://www.nexusguard.com",
     "icon": "https://icons.duckduckgo.com/ip3/www.nexusguard.com.ico",
     "slug": "nexusguard-public-website",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
     "time": 401,
-    "timeDay": 491,
-    "timeWeek": 510,
-    "timeMonth": 444,
+    "timeDay": 388,
+    "timeWeek": 493,
+    "timeMonth": 447,
     "timeYear": 401,
-    "dailyMinutesDown": {}
+    "dailyMinutesDown": {
+      "2024-12-19": 0
+    }
   },
   {
     "name": "Nexusguard Mitigation Infrastructure",
     "url": "https://www.nexusguard.com",
     "icon": "https://icons.duckduckgo.com/ip3/www.nexusguard.com.ico",
     "slug": "nexusguard-mitigation-infrastructure",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
     "time": 74,
-    "timeDay": 98,
-    "timeWeek": 98,
-    "timeMonth": 101,
+    "timeDay": 46,
+    "timeWeek": 92,
+    "timeMonth": 97,
     "timeYear": 74,
-    "dailyMinutesDown": {}
+    "dailyMinutesDown": {
+      "2024-12-19": 0
+    }
   }
 ]
