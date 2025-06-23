@@ -5,7 +5,7 @@
     "icon": "https://icons.duckduckgo.com/ip3/www.nexusguard.com.ico",
     "slug": "nexusguard-public-website",
     "status": "up",
-    "uptime": "99.94%",
+    "uptime": "99.95%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
@@ -14,7 +14,7 @@
     "timeDay": 0,
     "timeWeek": 379,
     "timeMonth": 417,
-    "timeYear": 451,
+    "timeYear": 452,
     "dailyMinutesDown": {
       "2024-12-19": 323
     }
@@ -25,7 +25,7 @@
     "icon": "https://icons.duckduckgo.com/ip3/www.nexusguard.com.ico",
     "slug": "nexusguard-mitigation-infrastructure",
     "status": "up",
-    "uptime": "99.94%",
+    "uptime": "99.95%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
@@ -34,7 +34,7 @@
     "timeDay": 0,
     "timeWeek": 51,
     "timeMonth": 58,
-    "timeYear": 79,
+    "timeYear": 80,
     "dailyMinutesDown": {
       "2024-12-19": 323
     }
