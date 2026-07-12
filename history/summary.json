@@ -5,11 +5,11 @@
     "icon": "https://icons.duckduckgo.com/ip3/www.nexusguard.com.ico",
     "slug": "nexusguard-public-website",
     "status": "down",
-    "uptime": "70.65%",
+    "uptime": "70.56%",
     "uptimeDay": "0.00%",
     "uptimeWeek": "4.34%",
     "uptimeMonth": "2.38%",
-    "uptimeYear": "36.41%",
+    "uptimeYear": "36.13%",
     "time": 456,
     "timeDay": 0,
     "timeWeek": 880,
@@ -249,7 +249,8 @@
       "2026-04-01": 1440,
       "2026-03-31": 1440,
       "2026-03-30": 1238,
-      "2026-07-11": 205,
+      "2026-07-12": 217,
+      "2026-07-11": 1440,
       "2026-07-10": 1440
     }
   },
@@ -259,16 +260,16 @@
     "icon": "https://icons.duckduckgo.com/ip3/www.nexusguard.com.ico",
     "slug": "nexusguard-mitigation-infrastructure",
     "status": "down",
-    "uptime": "70.65%",
+    "uptime": "70.56%",
     "uptimeDay": "0.00%",
     "uptimeWeek": "4.34%",
     "uptimeMonth": "2.38%",
-    "uptimeYear": "36.41%",
+    "uptimeYear": "36.13%",
     "time": 83,
     "timeDay": 0,
     "timeWeek": 861,
     "timeMonth": 861,
-    "timeYear": 78,
+    "timeYear": 79,
     "dailyMinutesDown": {
       "2025-12-11": 1050,
       "2025-12-10": 1440,
@@ -503,7 +504,8 @@
       "2026-04-01": 1440,
       "2026-03-31": 1440,
       "2026-03-30": 1238,
-      "2026-07-11": 205,
+      "2026-07-12": 217,
+      "2026-07-11": 1440,
       "2026-07-10": 1440
     }
   }
