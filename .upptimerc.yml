@@ -23,14 +23,19 @@ status-website:
   logoUrl: https://assets-global.website-files.com/657ac0efa4c56f07f2a96a09/657ac0efa4c56f07f2a96a59_sticky-logo-1.svg
   favicon: https://assets-global.website-files.com/657ac0efa4c56f07f2a96a09/658682ffe0c14e285b4014fb_Nexusguard_Logo_Mark%201.png
   name: Nexusguard Status Page
-  introTitle: "This is the status page of **Nexusguard** public-facing services"
-  introMessage: Welcome to the status page of Nexusguard!
+  introTitle: "Status of **Nexusguard** public-facing services"
+  introMessage: "Current availability of the Nexusguard public website and mitigation infrastructure."
   theme: dark
   navbar:
     - title: Status
       href: /
     - title: About Us
       href: https://nexusguard.com
+  # Custom CSS is loaded via `links` (after global.css). Do not set themeUrl:
+  # that slot is injected *before* global.css and also skips dark.css fallback.
+  links:
+    - rel: stylesheet
+      href: https://nexusguard.github.io/uptime/nexusguard-theme.css
 
 workflowSchedule:
   graphs: "0 8 * * 1,3,5"
