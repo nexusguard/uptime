@@ -9,6 +9,7 @@ sites:
     method: GET
     headers:
       - "X-Nexusguard-Uptime-Token: $UPTIME_WAF_TOKEN"
+      - "User-Agent: x-uptime-probe"
 
   - name: Nexusguard Mitigation Infrastructure
     url: https://www.nexusguard.com
