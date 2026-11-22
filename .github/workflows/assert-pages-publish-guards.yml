@@ -1,0 +1,49 @@
+# Custom workflow — not overwritten by Upptime v1.46.5 update-template
+# (that command only regenerates graphs/response-time/setup/site/summary/
+# update-template/updates/uptime.yml).
+name: Assert Pages publish guards
+on:
+  push:
+    paths:
+      - ".github/workflows/site.yml"
+      - ".github/workflows/setup.yml"
+      - ".github/workflows/update-template.yml"
+      - "scripts/assert_pages_publish_guards.py"
+      - ".github/workflows/assert-pages-publish-guards.yml"
+  pull_request:
+    paths:
+      - ".github/workflows/site.yml"
+      - ".github/workflows/setup.yml"
+      - ".github/workflows/update-template.yml"
+      - "scripts/assert_pages_publish_guards.py"
+      - ".github/workflows/assert-pages-publish-guards.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.repository }}-assert-pages-publish-guards
+  cancel-in-progress: true
+
+jobs:
+  guards:
+    name: Pages publish guards
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - name: Re-apply guards after update-template (default branch only)
+        if: github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        run: python3 scripts/assert_pages_publish_guards.py --apply
+      - name: Commit restored guards
+        if: github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        run: |
+          git add .github/workflows/site.yml .github/workflows/setup.yml .github/workflows/update-template.yml
+          git diff --cached --quiet && echo "no guard changes" && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -s -m "Restore default-branch Pages publish guards"
+          git push
+      - name: Verify Pages publish guards
+        run: python3 scripts/assert_pages_publish_guards.py --check
