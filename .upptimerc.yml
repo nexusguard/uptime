@@ -15,6 +15,7 @@ sites:
     method: GET
     headers:
       - "X-Nexusguard-Uptime-Token: $UPTIME_WAF_TOKEN"
+      - "User-Agent: x-uptime-probe"
     # "status":"up" for normal
     __dangerous__body_down: '"status":"down"'
     __dangerous__body_degraded: '"status":"degraded"'
