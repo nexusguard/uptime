@@ -1,0 +1,560 @@
+/*
+ * Nexusguard theme for the Upptime status page (v1.46.5 / status-page layout).
+ *
+ * Cascade (src/routes/_layout.svelte + src/template.html):
+ *   %sapper.styles%  →  theme | themeUrl  →  global.css  →  status-website.links  →  css
+ *
+ * themeUrl is injected BEFORE global.css and, if set, skips the built-in dark.css
+ * fallback. This file is therefore loaded only via status-website.links so:
+ *   - theme: dark still supplies variables if this asset 404s
+ *   - typography/layout beat global.css
+ *   - equal-specificity overrides beat Svelte scoped rules (head follows sapper.styles)
+ *
+ * Extra [class]/[href]/[type] selectors match Nav/LiveStatus scoped specificity
+ * without depending on hashed class names.
+ *
+ * Brand tokens: https://www.nexusguard.com (navy #1A212F, primary #E15829, Inter).
+ * Status green/red/amber stay on Upptime dark.css semantics.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --nxg-white: #ffffff;
+  --nxg-gray-100: #f2f4f7;
+  --nxg-gray-200: #eaecf0;
+  --nxg-gray-300: #d0d5dd;
+  --nxg-gray-400: #98a2b3;
+  --nxg-gray-500: #667085;
+  --nxg-gray-600: #475467;
+  --nxg-gray-700: #344054;
+  --nxg-gray-800: #1d2939;
+  --nxg-gray-900: #101828;
+  --nxg-primary-500: #e15829;
+  --nxg-primary-600: #d34423;
+  --nxg-primary-700: #af331f;
+  --nxg-dark-background: #1a212f;
+
+  --body-background-color: #1a212f;
+  --body-text-color: #f2f4f7;
+  --card-background-color: #1d2939;
+  --nav-background-color: #101828;
+  --nav-border-bottom-color: #344054;
+  --nav-current-border-bottom-color: #e15829;
+  --card-border-color: #344054;
+
+  --down-border-left-color: #eb3b5a;
+  --down-background-color: #6b1020;
+  --degraded-border-left-color: #f7b731;
+  --up-border-left-color: #20bf6b;
+  --tag-color: #101828;
+  --tag-up-background-color: #20bf6b;
+  --tag-down-background-color: #eb3b5a;
+  --tag-degraded-background-color: #f7b731;
+  --change-background-color: #f7b731;
+
+  /*
+   * White on #E15829 is 3.73:1. White on #D34423 is 4.54:1.
+   * Keep the brand fill on the border; use the darker orange for the fill.
+   */
+  --error-button-border-color: #e15829;
+  --error-button-background-color: #d34423;
+  --error-button-color: #ffffff;
+  --submit-button-border-color: #e15829;
+  --submit-button-background-color: #d34423;
+  --submit-button-color: #ffffff;
+
+  --graph-opacity: 1;
+  --graph-filter: none;
+
+  --code-color: #f2f4f7;
+  --code-background-color: #101828;
+  --down-color-color: #f2f4f7;
+  --up-color-color: #f2f4f7;
+  --degraded-color-color: #f2f4f7;
+}
+
+html {
+  color-scheme: dark;
+  overflow-x: visible;
+}
+
+body {
+  font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: visible;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.6rem 0;
+}
+
+h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  opacity: 1;
+  color: #d0d5dd;
+}
+
+h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+main.container,
+.container {
+  max-width: 52.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+@media (min-width: 40rem) {
+  main.container,
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Navigation — stacked brand row + link row on small screens                  */
+/* html body prefixes beat Sapper inject_styles() hashed rules that load last. */
+/* -------------------------------------------------------------------------- */
+
+html body nav[class] {
+  font-weight: 500;
+  padding: 0;
+  margin-bottom: 2rem;
+  white-space: normal !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+
+html body nav[class] > .container[class] {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.15rem 0.75rem;
+  max-width: 52.5rem;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.35rem 1rem 0.15rem;
+}
+
+html body nav[class] > .container[class] > div {
+  min-width: 0;
+  max-width: 100%;
+  float: none;
+}
+
+html body nav a[href] {
+  padding: 0.7rem 0.85rem;
+  font-size: 0.9375rem;
+  color: #d0d5dd;
+  display: inline-flex !important;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 2.75rem;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+
+html body nav [aria-current] {
+  color: #ffffff;
+  border-bottom-width: 2px;
+  font-weight: 600;
+}
+
+html body nav a[href]:hover {
+  color: #ffffff;
+}
+
+html body nav a.logo[href][class] {
+  float: none;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0;
+  margin-right: 0;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: #f2f4f7;
+  letter-spacing: -0.02em;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html body nav a.logo[href] img[class] {
+  height: 1.15rem;
+  width: auto;
+  max-width: 8.5rem;
+  max-height: 1.75rem;
+  margin-right: 0;
+  flex: 0 0 auto;
+  border-radius: 0.25rem;
+  background: #ffffff;
+  padding: 0.35rem 0.5rem;
+  box-sizing: content-box;
+  filter: none;
+}
+
+html body nav a.logo[href] > div {
+  min-width: 0;
+  flex: 1 1 auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.25;
+}
+
+html body nav ul[class] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  float: none;
+}
+
+html body nav ul[class] li {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 40rem) {
+  html body nav[class] > .container[class] {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+  }
+
+  html body nav a.logo[href][class] {
+    width: auto;
+    max-width: min(100%, 28rem);
+    margin-right: 1rem;
+  }
+
+  html body nav ul[class] {
+    width: auto;
+    flex: 0 1 auto;
+    justify-content: flex-end;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Intro                                                                       */
+/* -------------------------------------------------------------------------- */
+
+header {
+  margin-bottom: 2.25rem;
+}
+
+header h1 {
+  max-width: 36rem;
+  overflow-wrap: anywhere;
+}
+
+header p.lead,
+p.lead {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #d0d5dd;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Live-status period toggle — keep radios in tab order                        */
+/* -------------------------------------------------------------------------- */
+
+.f.changed,
+.f {
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  min-width: 0;
+}
+
+@media (max-width: 39.99rem) {
+  div.f.changed,
+  div.f {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+html body form.r {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+html body form.r input[type="radio"][class] {
+  display: inline-block !important;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  border: 0;
+}
+
+html body form.r label,
+html body .r label {
+  color: #d0d5dd;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  margin-left: 0 !important;
+  padding: 0.4rem 0.7rem;
+  box-sizing: border-box;
+  border-bottom: 2px solid transparent;
+}
+
+html body form.r input:checked + label,
+html body .r input:checked + label {
+  color: #ffffff;
+  font-weight: 600;
+  border-bottom-color: #e15829;
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+  text-decoration-thickness: 2px;
+}
+
+html body form.r input:focus-visible + label {
+  outline: 2px solid #e15829;
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Cards — never use border shorthand (it resets color to currentColor)        */
+/* -------------------------------------------------------------------------- */
+
+article {
+  padding: 0.85rem 1rem;
+  border-radius: 0.5rem;
+  border-top: 1px solid var(--card-border-color);
+  border-right: 1px solid var(--card-border-color);
+  border-bottom: 1px solid var(--card-border-color);
+  border-left: 1px solid var(--card-border-color);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+article + article {
+  margin-top: 0.75rem;
+}
+
+article.up,
+article.down,
+article.degraded {
+  border-left-width: 0.25rem;
+}
+
+article.up {
+  border-left-color: var(--up-border-left-color);
+}
+
+article.down {
+  border-left-color: var(--down-border-left-color);
+}
+
+article.degraded {
+  border-left-color: var(--degraded-border-left-color);
+}
+
+article h4 {
+  margin-bottom: 0.35rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+article h4 a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+article h4 a:hover {
+  color: #ffffff;
+}
+
+article .data {
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+article .f {
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  min-width: 0;
+  align-items: flex-start;
+}
+
+article .f .r {
+  min-width: 0;
+  max-width: 100%;
+}
+
+article .f .r a,
+article.link .f a {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 39.99rem) {
+  article .f {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  article .f .r {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 40rem) {
+  article {
+    padding: 1rem 1.15rem;
+  }
+
+  article.graph {
+    padding-right: 11.5rem;
+    min-height: 6.25rem;
+  }
+}
+
+@media (max-width: 39.99rem) {
+  article.graph {
+    background-position: right 0.5rem top 0.5rem;
+    background-size: 5.75rem auto;
+    padding-right: 1rem;
+    padding-top: 0.85rem;
+  }
+}
+
+.tag {
+  border-radius: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.25rem 0.45rem;
+}
+
+section + h2,
+h2 {
+  margin-top: 2.25rem;
+}
+
+article + h3,
+h3 {
+  margin-top: 1.15rem;
+}
+
+section {
+  min-width: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Footer / chrome                                                             */
+/* -------------------------------------------------------------------------- */
+
+footer[class],
+footer {
+  text-align: center;
+  margin-top: 2.5rem;
+  opacity: 1;
+  color: #d0d5dd;
+  font-size: 0.8125rem;
+}
+
+footer a {
+  color: #eaecf0;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+footer a:hover {
+  color: #e15829;
+}
+
+.submit-button,
+a.error-button {
+  border-radius: 0.375rem;
+  font-weight: 600;
+}
+
+code {
+  border-radius: 0.2rem;
+  padding: 0.05rem 0.3rem;
+}
+
+article .graph {
+  opacity: var(--graph-opacity);
+  filter: var(--graph-filter);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+label:focus-visible {
+  outline: 2px solid #e15829;
+  outline-offset: 2px;
+}
