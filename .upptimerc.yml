@@ -1,7 +1,7 @@
 # Change these first
 owner: nexusguard # Your GitHub organization or username, where this repository lives
 repo: uptime # The name of this repository
-user-agent: nexusguard-status-probe
+user-agent: x-uptime-probe
 
 sites:
   - name: Nexusguard Public Website
@@ -9,14 +9,12 @@ sites:
     method: GET
     headers:
       - "X-Nexusguard-Uptime-Token: $UPTIME_WAF_TOKEN"
-      - "User-Agent: x-uptime-probe"
 
   - name: Nexusguard Mitigation Infrastructure
     url: https://www.nexusguard.com
     method: GET
     headers:
       - "X-Nexusguard-Uptime-Token: $UPTIME_WAF_TOKEN"
-      - "User-Agent: x-uptime-probe"
     # "status":"up" for normal
     __dangerous__body_down: '"status":"down"'
     __dangerous__body_degraded: '"status":"degraded"'
